@@ -3,13 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CampGrounds</title>
+    <title>Campgrounds</title>
 </head>
 <body>
     <h1>All Campgrounds</h1>
+    <div>
+        <a href="/campgrounds/new">Add Campgrounds</a>
+    </div>
     <ul>
         <% for (let campGround of campGrounds) {%>
-            <li><%= campGround.title %></li>
+            <li><a href="/campgrounds/<%= campGround._id %>"><%= campGround.title %></a></li>
             <% } %>
     </ul>
 </body>
