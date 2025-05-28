@@ -1,49 +1,66 @@
 <% layout('layouts/boilerplate') %>
-<div class="row">
-    <h1 class="text-center">New Campground</h1>
-            <div class="col-6 offset-3">
-                <form action="/campgrounds" method="post">
-                    <div class="mb-2">
-                        <label class="form-label" for="">Title</label>
-                        <input class="form-control" type="text" id="title" name="campground[title]">
-                    </div>
-                    <div class="mb-2">
-                        <label class="form-label" for="">Location</label>
-                        <input class="form-control" type="text" id="location" name="campground[location]">
-                    </div>
-                    <div class="mb-2">
-                        <label for="image" class="form-label">Image Url</label>
-                        <input type="text" class="form-control" id="image" name="campground[image]">
-                    </div>
-                    
-                    <div class="input-group mb-2">
-                        <label for="price" class="form-label">Campground Price</label>
-                        <div class="input-group">
-                            <span class="input-group-text" id="price-label">$</span>
-                            <input type="text" class="form-control" id="price" placeholder="0.00"
-                            aria-label="campground price" aria-describedby="basic-addon1" name="campground[price]">
-                        </div>
-                    </div>
-                    <div class="mb-2">
-                        <label for="description" class="form-label">Description</label>
-                        <textarea class="form-control" id="description" name="campground[description]"></textarea>
-                    </div>
-                    <div class="mb-2 text-center">
-                        <button class="btn btn-success ">Add New Campground</button>
-                    </div>
-                </form>
-                <div class="d-flex justify-content-evenly">
-
-                    <div class="mb-2">
-                        <button class="btn btn-info">
-                            <a href="/campgrounds">Back to Campgrounds</a>
-                        </button>
-                    </div>
-                    <div class="mb-2">
-                        <button class="btn btn-info">
-                            <a href="/">Back to Home</a>
-                        </button>
+    <div class="row">
+        <h1 class="text-center">New Campground</h1>
+        <div class="col-6 offset-3">
+            <form action="/campgrounds" method="post" novalidate class="validated-form">
+                <div class="mb-2">
+                    <label class="form-label" for="">Title</label>
+                    <input class="form-control" type="text" id="title" name="campground[title]" required>
+                    <div class="valid-feedback">
+                        Yeah Looks good!
                     </div>
                 </div>
+                <div class="mb-2">
+                    <label class="form-label" for="">Location</label>
+                    <input class="form-control" type="text" id="location" name="campground[location]" required>
+                    <div class="valid-feedback">
+                        Looks good!
+                    </div>
+                </div>
+                <div class="mb-2">
+                    <label for="image" class="form-label">Image Url</label>
+                    <input type="text" class="form-control" id="image" name="campground[image]" required>
+                    <div class="invalid-feedback">
+                        Please enter a valid link.
+                    </div>
+                </div>
+
+                <div class="input-group mb-2">
+                    <label for="price" class="form-label">Campground Price</label>
+                    <div class="input-group">
+                        <span class="input-group-text" id="price-label">$</span>
+                        <input type="text" class="form-control" id="price" placeholder="0.00"
+                            aria-label="campground price" aria-describedby="basic-addon1" name="campground[price]"
+                            required>
+                        <div class="invalid-feedback">
+                            Enter a valid price.
+                        </div>
+                    </div>
+                </div>
+                <div class="mb-2">
+                    <label for="description" class="form-label">Description</label>
+                    <textarea class="form-control" id="description" name="campground[description]" required></textarea>
+                    <div class="invalid-feedback">
+                        Please enter a message in the textarea.
+                    </div>
+                </div>
+                <div class="mb-2 text-center">
+                    <button class="btn btn-success ">Add New Campground</button>
+                </div>
+            </form>
+            <div class="d-flex justify-content-evenly">
+
+                <div class="mb-2">
+                    <button class="btn btn-info">
+                        <a href="/campgrounds">Back to Campgrounds</a>
+                    </button>
+                </div>
+                <div class="mb-2">
+                    <button class="btn btn-info">
+                        <a href="/">Back to Home</a>
+                    </button>
+                </div>
             </div>
+        </div>
     </div>
+
