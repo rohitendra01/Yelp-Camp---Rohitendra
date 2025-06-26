@@ -2,9 +2,21 @@ const mongoose = require('mongoose');
 const Review = require('./review');
 const Schema = mongoose.Schema;
 
+
+
+const ImageSchema = new Schema({
+    url : String,
+    filename : String
+});
+
+ImageSchema.virtual('thumbnail').get(function (){
+    return this.url.replace('/upload', '/upload/w_200');
+});
+
+
 const campGroundSchema = new Schema({
     title : String,
-    image : String,
+    image : [ImageSchema],
     price : Number,
     description : String,
     location : String,
@@ -16,7 +28,9 @@ const campGroundSchema = new Schema({
         type : Schema.Types.ObjectId,
         ref : 'Review'
     }]
-})
+});
+
+
 
 
 campGroundSchema.post('findOneAndDelete', async function(doc){
@@ -25,10 +39,12 @@ campGroundSchema.post('findOneAndDelete', async function(doc){
             _id:{
                 $in: doc.reviews
             }
-        })
+        });
     }
-})
+});
 
 
+campGroundSchema.set('toObject', { virtuals: true });
+campGroundSchema.set('toJSON', { virtuals: true });
 
 module.exports = mongoose.model('Campground', campGroundSchema);

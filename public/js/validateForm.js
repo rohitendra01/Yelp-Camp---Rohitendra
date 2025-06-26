@@ -1,6 +1,8 @@
  (() => {
             'use strict'
 
+            beCustomFileInput.init();
+
             const forms = document.querySelectorAll('.validated-form')
 
             Array.from(forms).forEach(form => {

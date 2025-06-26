@@ -1,3 +1,8 @@
+if(process.env.NODE_ENV != "production"){
+  require('dotenv').config();
+}
+
+
 const express = require('express');
 const mongoose = require('mongoose');
 const ejsMate = require('ejs-mate');
@@ -7,6 +12,7 @@ const session = require('express-session');
 const flash = require('connect-flash');
 const passport = require('passport');
 const LocalStrategy = require('passport-local');
+
 
 const { log } = require('console');
 const {campgroundSchema, reviewSchema} = require('./schema.js')
@@ -88,6 +94,10 @@ const validateReview = (req,res,next) =>{
     next();
   }  
 }
+
+
+
+
 
 
 
