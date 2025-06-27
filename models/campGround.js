@@ -2,6 +2,7 @@ const mongoose = require('mongoose');
 const Review = require('./review');
 const Schema = mongoose.Schema;
 
+const opts = { toJSON: { virtuals: true } };
 
 
 const ImageSchema = new Schema({
@@ -17,6 +18,17 @@ ImageSchema.virtual('thumbnail').get(function (){
 const campGroundSchema = new Schema({
     title : String,
     image : [ImageSchema],
+    geometry : {
+        type : {
+            type : String,
+            enum : ['Point'],
+            required : true
+        },
+        coordinates : {
+            type : [Number],
+            required : true
+        }
+    },
     price : Number,
     description : String,
     location : String,
@@ -31,7 +43,11 @@ const campGroundSchema = new Schema({
 });
 
 
-
+campGroundSchema.virtual('properties.popUpMarkup').get(function () {
+    return `
+    <strong><a href="/campgrounds/${this._id}">${this.title}</a><strong>
+    <p>${this.description.substring(0, 20)}...</p>`
+});
 
 campGroundSchema.post('findOneAndDelete', async function(doc){
     if (doc) {

@@ -2,6 +2,8 @@
     <div class="row">
         <div class="col-6">
             <div class="card">
+                <div id="map" class="w-100 h-100" style="min-height: 300px;
+  height: 100%;"></div>
                 <div id="campgroundCarousel" class="carousel slide mb-3">
                     <div class="carousel-inner">
                         <% campground.image.forEach((img, idx) => { %>
@@ -34,7 +36,7 @@
                         <%= campground.location %>
                     </li>
                     <li class="list-group-item text-secondary">Submitted By : 
-                        <%= campground.author.username %>
+                        <%= campground.author ? campground.author.username : "Unknown" %>
                     </li>
                     <li class="list-group-item">$<%= campground.price %> /night</li>
                 </ul>
@@ -106,28 +108,8 @@
             </div>
         </div>
     <script>
-document.addEventListener('DOMContentLoaded', function() {
-    const stars = document.querySelectorAll('#star-rating label');
-    const radios = document.querySelectorAll('#star-rating input[type="radio"]');
-    stars.forEach((star, idx) => {
-        star.addEventListener('mouseenter', () => {
-            for(let i = 0; i < stars.length; i++) {
-                stars[i].style.color = i <= idx ? 'gold' : '#ccc';
-            }
-        });
-        star.addEventListener('mouseleave', () => {
-            let checkedIdx = -1;
-            radios.forEach((radio, i) => { if(radio.checked) checkedIdx = i; });
-            for(let i = 0; i < stars.length; i++) {
-                stars[i].style.color = i <= checkedIdx ? 'gold' : '#ccc';
-            }
-        });
-        star.addEventListener('click', () => {
-            radios[idx].checked = true;
-            for(let i = 0; i < stars.length; i++) {
-                stars[i].style.color = i <= idx ? 'gold' : '#ccc';
-            }
-        });
-    });
-});
-</script>
+        const maptilerApiKey = '<%- process.env.MAPTILER_API_KEY %>';
+        const campground = <%- JSON.stringify(campground) %>;
+    </script>
+
+    <script src="/js/showPage.js"></script>
